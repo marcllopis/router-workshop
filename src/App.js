@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import { Switch, Route } from 'react-router-dom';
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+import Navbar from './components/Navbar';
+import {texts} from './texts/texts';
 
 function App() {
+  let [appText] = useState(texts)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Switch>
+        <Route exact path='/' render={props => <Home texts={appText} {...props} />} />
+        <Route path='/about' render={props => <About texts={appText} {...props} />} />
+        <Route path='/contact' render={props => <Contact texts={appText} {...props} />} />
+      </Switch>
+      <footer>
+        <h3>Footer incoming</h3>
+      </footer>
     </div>
   );
 }
